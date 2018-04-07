@@ -21,4 +21,10 @@ public class Device {
     @GeneratedValue
     private Long id;
     private String name;
+    private Category category;
+    private CategoryModel categoryModel;
+    public Device(String name) {
+        this.name = name;
+    }
+
 }

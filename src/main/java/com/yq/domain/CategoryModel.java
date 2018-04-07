@@ -31,7 +31,6 @@ public class CategoryModel {
     private String name;
     private String data;
     @Properties
-    @Labels
     private Map<String, Object> properties = new HashMap<>();
 
 
@@ -39,4 +38,6 @@ public class CategoryModel {
         this.name = name;
         this.data =data;
     }
+
+    public CategoryModel() {}
 }

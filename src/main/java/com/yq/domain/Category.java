@@ -37,6 +37,7 @@ public class Category {
         this.picUrl = picUrl;
     }
 
+    public Category() {}
     public void addModel(Model model) {
         if (this.models == null) {
             this.models = new ArrayList<>();

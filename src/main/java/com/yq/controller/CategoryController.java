@@ -77,6 +77,7 @@ public class CategoryController {
         categoryModelRepository.save(cModel);
         model = new Model(cModel, categoryPlane);
         categoryPlane.addModel(model);
+        categoryRepository.save(categoryPlane);
 
 
         cModel = new CategoryModel("T" , "特快 ");
