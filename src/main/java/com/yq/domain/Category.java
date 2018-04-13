@@ -36,7 +36,7 @@ public class Category {
         this.name = name;
         this.picUrl = picUrl;
     }
-
+    //Entities handled by the OGM must have one empty public constructor to allow the library to construct the objects.
     public Category() {}
     public void addModel(Model model) {
         if (this.models == null) {

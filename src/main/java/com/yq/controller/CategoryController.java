@@ -94,7 +94,7 @@ public class CategoryController {
         Map<String, Object> myMap = new HashMap<>();
         myMap.put("key1", "value1");
         myMap.put("key2", "value2");
-        cModel.setProperties(myMap);
+        cModel.setDynamicProps(myMap);
         categoryModelRepository.save(cModel);
         model = new Model(cModel, categoryTrain);
         categoryTrain.addModel(model);

@@ -31,7 +31,7 @@ public class CategoryModel {
     private String name;
     private String data;
     @Properties
-    private Map<String, Object> properties = new HashMap<>();
+    private Map<String, Object> dynamicProps = new HashMap<>();
 
 
     public CategoryModel(String name, String data) {
