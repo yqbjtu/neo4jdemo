@@ -3,9 +3,11 @@
 
 package com.yq.domain;
 
+import lombok.NoArgsConstructor;
 import org.neo4j.ogm.annotation.GeneratedValue;
 import org.neo4j.ogm.annotation.Id;
 import org.neo4j.ogm.annotation.NodeEntity;
+import org.neo4j.ogm.annotation.Relationship;
 
 /**
  * Simple to Introduction
@@ -16,12 +18,14 @@ import org.neo4j.ogm.annotation.NodeEntity;
  */
 @NodeEntity
 @lombok.Data
+@NoArgsConstructor
 public class Device {
     @Id
     @GeneratedValue
     private Long id;
+
     private String name;
-    private Category category;
+    @Relationship(type = "Model_2_Device", direction = Relationship.INCOMING)
     private CategoryModel categoryModel;
     public Device(String name) {
         this.name = name;

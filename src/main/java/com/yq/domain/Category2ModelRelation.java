@@ -9,22 +9,23 @@ import org.neo4j.ogm.annotation.*;
 
 /**
  */
-@RelationshipEntity(type = "BELONG_TO")
-public class Model {
+@RelationshipEntity(type = "Category_2_Model")
+public class Category2ModelRelation {
 
     @Id
     @GeneratedValue
 	private Long id;
 
 	@StartNode
-	private CategoryModel categoryModel;
+	private Category category;
 
 	@EndNode
-	private Category category;
-	public Model() {
+	private CategoryModel categoryModel;
+
+	public Category2ModelRelation() {
 	}
 
-	public Model(CategoryModel categoryModel, Category category) {
+	public Category2ModelRelation(CategoryModel categoryModel, Category category) {
 		this.categoryModel = categoryModel;
 		this.category = category;
 	}

@@ -3,6 +3,7 @@
 
 package com.yq.domain;
 
+import lombok.NoArgsConstructor;
 import org.neo4j.ogm.annotation.GeneratedValue;
 import org.neo4j.ogm.annotation.Id;
 import org.neo4j.ogm.annotation.Labels;
@@ -23,6 +24,7 @@ import java.util.Map;
  */
 @NodeEntity
 @lombok.Data
+@NoArgsConstructor
 public class CategoryModel {
 
     @Id
@@ -39,5 +41,4 @@ public class CategoryModel {
         this.data =data;
     }
 
-    public CategoryModel() {}
 }

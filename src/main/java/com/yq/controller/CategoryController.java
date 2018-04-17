@@ -1,11 +1,11 @@
 package com.yq.controller;
 
-import  com.yq.domain.Category;
+import com.yq.domain.Category;
 import com.yq.domain.CategoryModel;
-import com.yq.domain.Model;
 import com.yq.repository.CategoryModelRepository;
 import com.yq.repository.CategoryRepository;
-import com.yq.repository.ModelRepository;
+import com.yq.repository.Category2ModelRelationRepository;
+
 import com.yq.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,8 +14,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  */
@@ -34,7 +32,7 @@ public class CategoryController {
     @Autowired
     CategoryModelRepository categoryModelRepository;
     @Autowired
-    ModelRepository  modelRepository;
+    Category2ModelRelationRepository relationRepository;
 
     @GetMapping("/byName")
     public Category findByName(@RequestParam String name) {
@@ -51,10 +49,18 @@ public class CategoryController {
         return categoryRepository.findAll();
     }
 
+    @GetMapping("/delRel")
+    public Iterable<Category> deleteRalation() {
+        //clean work
+        //equal to MATCH (n)-[r0:`Category_2_Model`]-() DELETE r0
+        relationRepository.deleteAll();
+        return categoryRepository.findAll();
+    }
+
     @GetMapping("/init")
     public Iterable<Category> init() {
         //clean work
-        modelRepository.deleteAll();
+        relationRepository.deleteAll();
         categoryRepository.deleteAll();
         categoryModelRepository.deleteAll();
 
@@ -70,34 +76,23 @@ public class CategoryController {
 
         CategoryModel cModel = new CategoryModel("波音737" , "US ");
         categoryModelRepository.save(cModel);
-        Model model = new Model(cModel, categoryPlane);
-        categoryPlane.addModel(model);
+        categoryPlane.addModel(cModel);
 
         cModel = new CategoryModel("空客380" , "EU ");
         categoryModelRepository.save(cModel);
-        model = new Model(cModel, categoryPlane);
-        categoryPlane.addModel(model);
+
+        categoryPlane.addModel(cModel);
         categoryRepository.save(categoryPlane);
 
 
-        cModel = new CategoryModel("T" , "特快 ");
-        categoryModelRepository.save(cModel);
-        model = new Model(cModel, categoryTrain);
-        categoryTrain.addModel(model);
+        CategoryModel tModel = new CategoryModel("T" , "特快 ");
+        categoryTrain.addModel(tModel);
 
-        cModel = new CategoryModel("D" , "动车 ");
-        categoryModelRepository.save(cModel);
-        model = new Model(cModel, categoryTrain);
-        categoryTrain.addModel(model);
+        CategoryModel dModel = new CategoryModel("D" , "动车 ");
+        categoryTrain.addModel(dModel);
 
-        cModel = new CategoryModel("G" , "高铁" );
-        Map<String, Object> myMap = new HashMap<>();
-        myMap.put("key1", "value1");
-        myMap.put("key2", "value2");
-        cModel.setDynamicProps(myMap);
-        categoryModelRepository.save(cModel);
-        model = new Model(cModel, categoryTrain);
-        categoryTrain.addModel(model);
+        CategoryModel gModel = new CategoryModel("G" , "高铁" );
+        categoryTrain.addModel(gModel);
 
         categoryRepository.save(categoryTrain);
         return categoryRepository.findAll();
